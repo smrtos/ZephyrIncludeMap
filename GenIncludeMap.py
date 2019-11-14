@@ -47,7 +47,7 @@ def LoadConfigMacros(everything):
     AddCompilerIdMacro(everything)
     return
 
-def LoadIncludeSearchPath(everything):
+def LoadIncludeSearchPaths(everything):
     includeSearchPaths = list()
     with open(everything["ninjaBldFile"], "r") as f:
         lines = f.readlines()
@@ -56,7 +56,8 @@ def LoadIncludeSearchPath(everything):
                 break #all the INCLUDES in build.ninja are the same, so picking one is enough.
     m = re.findall(r"(-I[^\s]+)+", line) #\s*-D([^\s=]+)
     includeSearchPaths.extend(x[2:] if not x[-1] == "." else x[2:-1] for x in m)
-    everything["includeSearchPaths"] = [x if os.path.isabs(x) else os.path.join(everything["bldDir"], x) for x in includeSearchPaths]
+    rawIncludeSearchPaths = [x if os.path.isabs(x) else os.path.join(everything["bldDir"], x) for x in includeSearchPaths]
+    everything["includeSearchPaths"] = [os.path.normpath(x) for x in rawIncludeSearchPaths]
     return
 
 def PreProcessSrcFile(everything, srcFileFullpath):
@@ -143,7 +144,7 @@ def ProcessWorkItem(everything, itemTuple):
 def DoWork(everything):
     print("Start generating include map for:\n[%s]\n" % everything["srcFileFullpath"])
     GetNinjaBuildFile(everything)
-    LoadIncludeSearchPath(everything)
+    LoadIncludeSearchPaths(everything)
     LoadConfigMacros(everything)
 
     AddItemToBacklog(everything, everything["srcFileFullpath"])
@@ -187,36 +188,41 @@ def IsGeneratedFile(filePath):
 def IsTheStartingNode(filePath):
     return everything["srcFileFullpath"] in filePath
 
+def DetermineNodeLooks(everything, node):
+    shape = "oval"
+    style = "filled"
+    fontName = ""
+    if(IsGeneratedFile(node)):            
+        nodeText = os.path.relpath(node, everything["bldDir"]).replace("\\", "\n")
+        nodeColor = "lightblue"
+    elif(IsUnresolvedFile(node)):
+        nodeText = node.replace("\\", "\n")
+        nodeColor = "lightgrey"
+    elif(IsTheStartingNode(node)):
+        nodeText = os.path.relpath(node, everything["srcDir"]).replace("\\", "\n")
+        shape = "box"
+        nodeColor = "green"
+        fontName = "bold"
+    else:
+        nodeText = os.path.relpath(node, everything["srcDir"]).replace("\\", "\n")
+        nodeColor = "black"
+        style = ""
+    return tuple([nodeText, nodeColor, shape, style, fontName])
+
 def GenerateGraph(everything):
     graph = Digraph(engine="dot", comment="Include Map for {0}".format(everything["srcFileFullpath"]))
     gm = everything["graphMatrix"]
     for fromNode in gm.keys():
-        if(IsGeneratedFile(fromNode)):            
-            fromNodeText = os.path.relpath(fromNode, everything["bldDir"]).replace("\\", "\n")
-            graph.node(fromNodeText, label = fromNodeText, color = "green", style = "filled", shape = "oval")
-        elif(IsUnresolvedFile(fromNode)):
-            fromNodeText = fromNode.replace("\\", "\n")
-            graph.node(fromNodeText, label = fromNodeText, color = "red", style = "filled", shape = "oval")
-        elif(IsTheStartingNode(fromNode)):
-            fromNodeText = os.path.relpath(fromNode, everything["srcDir"]).replace("\\", "\n")
-            graph.node(fromNodeText, label = fromNodeText, color = "lightgrey", style = "filled", shape = "box", fontname = "bold")
-        else:
-            fromNodeText = os.path.relpath(fromNode, everything["srcDir"]).replace("\\", "\n")
-            graph.node(fromNodeText, label = fromNodeText, color = "black", shape = "oval")
+        looks1 = DetermineNodeLooks(everything, fromNode)
+        graph.node(looks1[0], label = looks1[0], color = looks1[1], shape = looks1[2], style = looks1[3], fontname = looks1[4])
         for toNode in gm[fromNode]:
-            if(IsGeneratedFile(toNode)):            
-                toNodeText = os.path.relpath(toNode, everything["bldDir"]).replace("\\", "\n")
-            elif(IsUnresolvedFile(toNode)):
-                toNodeText = toNode.replace("\\", "\n")
-            elif(IsTheStartingNode(toNode)):
-                toNodeText = os.path.relpath(toNode, everything["srcDir"]).replace("\\", "\n")
-            else:
-                toNodeText = os.path.relpath(toNode, everything["srcDir"]).replace("\\", "\n")
-            graph.edge(fromNodeText, toNodeText)
+            looks2 = DetermineNodeLooks(everything, toNode)
+            graph.edge(looks1[0], looks2[0])
     graphFileName = os.path.basename(everything["srcFileFullpath"])
     graph.render("./IncludeMap_{0}.gv".format(graphFileName), view= False)
     pass
 
+#experimental
 def GenerateGraph2(everything):
     graph = Digraph(comment = "Include Map for {0}".format(everything["srcFileFullpath"]))
     gm = everything["graphMatrix"]
@@ -225,7 +231,6 @@ def GenerateGraph2(everything):
         with graph.subgraph(name = "cluster_" + subGraphName) as subG:
             subG.attr(style="filled", color = "lightgrey")
             subG.attr(label = subGraphName)
-
             if(IsGeneratedFile(fromNode)):            
                 fromNodeText = os.path.relpath(fromNode, everything["bldDir"]).replace("\\", "\\\n")
                 subG.node(fromNodeText, label = fromNodeText, color = "green", style = "filled", shape = "oval")
@@ -258,6 +263,12 @@ def CleanUp(everything):
         os.remove(ppFile)
     return
 
+def OutputIncludeSearchPaths(everything):
+    print("The include search paths:")
+    for include in everything["includeSearchPaths"]:
+        print(os.path.normpath(include))
+    return
+
 if __name__=="__main__":
     everything = dict()    
     if(len(sys.argv)!= 4):
@@ -274,5 +285,6 @@ if __name__=="__main__":
         CleanseArgs(everything)
         DoWork(everything)
         GenerateGraph(everything)
+        OutputIncludeSearchPaths(everything)
         CleanUp(everything)
     sys.exit(0)
