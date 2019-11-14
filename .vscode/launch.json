@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": 
+            [
+                "C:/D/Sources/Zephyr.west/zephyrproject/zephyr",
+                "C:/D/Sources/Zephyr.west/zephyrproject/zephyr.build/helloworld.ARM",
+                "C:/D/Sources/Zephyr.west/zephyrproject/zephyr/kernel/mempool.c"                
+            ]
+        }
+    ]
+}
