@@ -8,6 +8,10 @@ import subprocess
 import glob
 from graphviz import Digraph
 
+# TODO
+# separate the logic of project speciifc handling and graph generation
+# so that this tool can be applied to different project.
+
 def GetAutoConfHeader(everything):
     everything["autoConfHeader"]=os.path.join(everything["bldDir"], "zephyr", "include", "generated", "autoconf.h")
     print("autoconf.h header found:\n[%s]\n" % everything["autoConfHeader"])
