@@ -1,0 +1,75 @@
+// Include Map for C:\D\Sources\Zephyr.west\zephyrproject\zephyr\ext\hal\cmsis\Include\core_cm4.h
+digraph {
+	"ext
+hal
+cmsis
+Include
+core_cm4.h" [label="ext
+hal
+cmsis
+Include
+core_cm4.h" color=green fontname=bold shape=box style=filled]
+	"ext
+hal
+cmsis
+Include
+core_cm4.h" -> "lib
+libc
+minimal
+include
+stdint.h"
+	"ext
+hal
+cmsis
+Include
+core_cm4.h" -> "ext
+hal
+cmsis
+Include
+cmsis_version.h"
+	"ext
+hal
+cmsis
+Include
+core_cm4.h" -> "ext
+hal
+cmsis
+Include
+cmsis_compiler.h"
+	"lib
+libc
+minimal
+include
+stdint.h" [label="lib
+libc
+minimal
+include
+stdint.h" color=black fontname="" shape=oval style=""]
+	"ext
+hal
+cmsis
+Include
+cmsis_version.h" [label="ext
+hal
+cmsis
+Include
+cmsis_version.h" color=black fontname="" shape=oval style=""]
+	"ext
+hal
+cmsis
+Include
+cmsis_compiler.h" [label="ext
+hal
+cmsis
+Include
+cmsis_compiler.h" color=black fontname="" shape=oval style=""]
+	"ext
+hal
+cmsis
+Include
+cmsis_compiler.h" -> "lib
+libc
+minimal
+include
+stdint.h"
+}

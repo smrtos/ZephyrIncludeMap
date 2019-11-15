@@ -1,0 +1,1560 @@
+// Include Map for C:\D\Sources\Zephyr.west\zephyrproject\zephyr\kernel\smp.c
+digraph {
+	"kernel
+smp.c" [label="kernel
+smp.c" color=green fontname=bold shape=box style=filled]
+	"kernel
+smp.c" -> "include
+kernel.h"
+	"kernel
+smp.c" -> "kernel
+include
+kernel_structs.h"
+	"kernel
+smp.c" -> "include
+spinlock.h"
+	"kernel
+smp.c" -> "kernel
+include
+kswap.h"
+	"kernel
+smp.c" -> "kernel
+include
+kernel_internal.h"
+	"include
+kernel.h" [label="include
+kernel.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel.h" -> "include
+kernel_includes.h"
+	"include
+kernel.h" -> "lib
+libc
+minimal
+include
+errno.h"
+	"include
+kernel.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"include
+kernel.h" -> "zephyr
+include
+generated
+kobj-types-enum.h"
+	"include
+kernel.h" -> "include
+debug
+tracing.h"
+	"include
+kernel.h" -> "zephyr
+include
+generated
+syscalls
+kernel.h"
+	"kernel
+include
+kernel_structs.h" [label="kernel
+include
+kernel_structs.h" color=black fontname="" shape=oval style=""]
+	"kernel
+include
+kernel_structs.h" -> "include
+kernel.h"
+	"kernel
+include
+kernel_structs.h" -> "include
+sys
+atomic.h"
+	"kernel
+include
+kernel_structs.h" -> "include
+sys
+dlist.h"
+	"kernel
+include
+kernel_structs.h" -> "include
+sys
+rb.h"
+	"kernel
+include
+kernel_structs.h" -> "include
+sys
+util.h"
+	"kernel
+include
+kernel_structs.h" -> "lib
+libc
+minimal
+include
+string.h"
+	"kernel
+include
+kernel_structs.h" -> "arch
+arm
+include
+kernel_arch_data.h"
+	"kernel
+include
+kernel_structs.h" -> "arch
+arm
+include
+kernel_arch_func.h"
+	"include
+spinlock.h" [label="include
+spinlock.h" color=black fontname="" shape=oval style=""]
+	"include
+spinlock.h" -> "include
+sys
+atomic.h"
+	"kernel
+include
+kswap.h" [label="kernel
+include
+kswap.h" color=black fontname="" shape=oval style=""]
+	"kernel
+include
+kswap.h" -> "kernel
+include
+ksched.h"
+	"kernel
+include
+kswap.h" -> "include
+spinlock.h"
+	"kernel
+include
+kswap.h" -> "arch
+arm
+include
+kernel_arch_func.h"
+	"kernel
+include
+kernel_internal.h" [label="kernel
+include
+kernel_internal.h" color=black fontname="" shape=oval style=""]
+	"kernel
+include
+kernel_internal.h" -> "include
+kernel.h"
+	"kernel
+include
+kernel_internal.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"include
+kernel_includes.h" [label="include
+kernel_includes.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "stddef.h"
+	"include
+kernel_includes.h" -> "include
+zephyr
+types.h"
+	"include
+kernel_includes.h" -> "lib
+libc
+minimal
+include
+limits.h"
+	"include
+kernel_includes.h" -> "include
+toolchain.h"
+	"include
+kernel_includes.h" -> "include
+linker
+sections.h"
+	"include
+kernel_includes.h" -> "include
+sys
+atomic.h"
+	"include
+kernel_includes.h" -> "include
+sys
+__assert.h"
+	"include
+kernel_includes.h" -> "include
+sched_priq.h"
+	"include
+kernel_includes.h" -> "include
+sys
+dlist.h"
+	"include
+kernel_includes.h" -> "include
+sys
+slist.h"
+	"include
+kernel_includes.h" -> "include
+sys
+sflist.h"
+	"include
+kernel_includes.h" -> "include
+sys
+util.h"
+	"include
+kernel_includes.h" -> "include
+sys
+mempool_base.h"
+	"include
+kernel_includes.h" -> "include
+kernel_version.h"
+	"include
+kernel_includes.h" -> "include
+random
+rand32.h"
+	"include
+kernel_includes.h" -> "arch
+arm
+include
+kernel_arch_thread.h"
+	"include
+kernel_includes.h" -> "include
+syscall.h"
+	"include
+kernel_includes.h" -> "include
+sys
+printk.h"
+	"include
+kernel_includes.h" -> "include
+arch
+cpu.h"
+	"include
+kernel_includes.h" -> "include
+sys
+rb.h"
+	"include
+kernel_includes.h" -> "include
+sys_clock.h"
+	"include
+kernel_includes.h" -> "include
+spinlock.h"
+	"lib
+libc
+minimal
+include
+errno.h" [label="lib
+libc
+minimal
+include
+errno.h" color=black fontname="" shape=oval style=""]
+	"lib
+libc
+minimal
+include
+errno.h" -> "include
+sys
+errno_private.h"
+	"lib
+libc
+minimal
+include
+stdbool.h" [label="lib
+libc
+minimal
+include
+stdbool.h" color=black fontname="" shape=oval style=""]
+	"zephyr
+include
+generated
+kobj-types-enum.h" [label="zephyr
+include
+generated
+kobj-types-enum.h" color=lightblue fontname="" shape=oval style=filled]
+	"include
+debug
+tracing.h" [label="include
+debug
+tracing.h" color=black fontname="" shape=oval style=""]
+	"include
+debug
+tracing.h" -> "include
+kernel.h"
+	"zephyr
+include
+generated
+syscalls
+kernel.h" [label="zephyr
+include
+generated
+syscalls
+kernel.h" color=lightblue fontname="" shape=oval style=filled]
+	"zephyr
+include
+generated
+syscalls
+kernel.h" -> "zephyr
+include
+generated
+syscall_list.h"
+	"zephyr
+include
+generated
+syscalls
+kernel.h" -> "zephyr
+include
+generated
+syscall_macros.h"
+	"include
+sys
+atomic.h" [label="include
+sys
+atomic.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+atomic.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"include
+sys
+atomic.h" -> "include
+toolchain.h"
+	"include
+sys
+atomic.h" -> "include
+zephyr
+types.h"
+	"include
+sys
+dlist.h" [label="include
+sys
+dlist.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+dlist.h" -> "stddef.h"
+	"include
+sys
+dlist.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"include
+sys
+dlist.h" -> "include
+toolchain.h"
+	"include
+sys
+rb.h" [label="include
+sys
+rb.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+rb.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"include
+sys
+util.h" [label="include
+sys
+util.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+util.h" -> "include
+zephyr
+types.h"
+	"include
+sys
+util.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"lib
+libc
+minimal
+include
+string.h" [label="lib
+libc
+minimal
+include
+string.h" color=black fontname="" shape=oval style=""]
+	"lib
+libc
+minimal
+include
+string.h" -> "stddef.h"
+	"lib
+libc
+minimal
+include
+string.h" -> "lib
+libc
+minimal
+include
+bits
+restrict.h"
+	"arch
+arm
+include
+kernel_arch_data.h" [label="arch
+arm
+include
+kernel_arch_data.h" color=black fontname="" shape=oval style=""]
+	"arch
+arm
+include
+kernel_arch_data.h" -> "include
+toolchain.h"
+	"arch
+arm
+include
+kernel_arch_data.h" -> "include
+linker
+sections.h"
+	"arch
+arm
+include
+kernel_arch_data.h" -> "include
+arch
+cpu.h"
+	"arch
+arm
+include
+kernel_arch_data.h" -> "arch
+arm
+include
+kernel_arch_thread.h"
+	"arch
+arm
+include
+kernel_arch_data.h" -> "include
+kernel.h"
+	"arch
+arm
+include
+kernel_arch_data.h" -> "kernel
+include
+kernel_internal.h"
+	"arch
+arm
+include
+kernel_arch_data.h" -> "include
+zephyr
+types.h"
+	"arch
+arm
+include
+kernel_arch_data.h" -> "include
+sys
+dlist.h"
+	"arch
+arm
+include
+kernel_arch_data.h" -> "include
+sys
+atomic.h"
+	"arch
+arm
+include
+kernel_arch_data.h" -> "arch
+arm
+include
+cortex_m
+stack.h"
+	"arch
+arm
+include
+kernel_arch_data.h" -> "arch
+arm
+include
+cortex_m
+exc.h"
+	"arch
+arm
+include
+kernel_arch_func.h" [label="arch
+arm
+include
+kernel_arch_func.h" color=black fontname="" shape=oval style=""]
+	"kernel
+include
+ksched.h" [label="kernel
+include
+ksched.h" color=black fontname="" shape=oval style=""]
+	"kernel
+include
+ksched.h" -> "kernel
+include
+kernel_structs.h"
+	"kernel
+include
+ksched.h" -> "kernel
+include
+timeout_q.h"
+	"kernel
+include
+ksched.h" -> "include
+debug
+tracing.h"
+	"kernel
+include
+ksched.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"stddef.h" [label="stddef.h" color=lightgrey fontname="" shape=oval style=filled]
+	"include
+zephyr
+types.h" [label="include
+zephyr
+types.h" color=black fontname="" shape=oval style=""]
+	"include
+zephyr
+types.h" -> "lib
+libc
+minimal
+include
+stdint.h"
+	"lib
+libc
+minimal
+include
+limits.h" [label="lib
+libc
+minimal
+include
+limits.h" color=black fontname="" shape=oval style=""]
+	"include
+toolchain.h" [label="include
+toolchain.h" color=black fontname="" shape=oval style=""]
+	"include
+toolchain.h" -> "include
+toolchain
+gcc.h"
+	"include
+linker
+sections.h" [label="include
+linker
+sections.h" color=black fontname="" shape=oval style=""]
+	"include
+linker
+sections.h" -> "include
+linker
+section_tags.h"
+	"include
+sys
+__assert.h" [label="include
+sys
+__assert.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+__assert.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"include
+sched_priq.h" [label="include
+sched_priq.h" color=black fontname="" shape=oval style=""]
+	"include
+sched_priq.h" -> "include
+sys
+util.h"
+	"include
+sched_priq.h" -> "include
+sys
+dlist.h"
+	"include
+sched_priq.h" -> "include
+sys
+rb.h"
+	"include
+sys
+slist.h" [label="include
+sys
+slist.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+slist.h" -> "stddef.h"
+	"include
+sys
+slist.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"include
+sys
+slist.h" -> "include
+sys
+list_gen.h"
+	"include
+sys
+sflist.h" [label="include
+sys
+sflist.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+sflist.h" -> "stddef.h"
+	"include
+sys
+sflist.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"include
+sys
+sflist.h" -> "include
+sys
+list_gen.h"
+	"include
+sys
+mempool_base.h" [label="include
+sys
+mempool_base.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+mempool_base.h" -> "include
+zephyr
+types.h"
+	"include
+sys
+mempool_base.h" -> "stddef.h"
+	"include
+kernel_version.h" [label="include
+kernel_version.h" color=black fontname="" shape=oval style=""]
+	"include
+random
+rand32.h" [label="include
+random
+rand32.h" color=black fontname="" shape=oval style=""]
+	"include
+random
+rand32.h" -> "include
+zephyr
+types.h"
+	"arch
+arm
+include
+kernel_arch_thread.h" [label="arch
+arm
+include
+kernel_arch_thread.h" color=black fontname="" shape=oval style=""]
+	"arch
+arm
+include
+kernel_arch_thread.h" -> "include
+zephyr
+types.h"
+	"include
+syscall.h" [label="include
+syscall.h" color=black fontname="" shape=oval style=""]
+	"include
+syscall.h" -> "zephyr
+include
+generated
+syscall_list.h"
+	"include
+syscall.h" -> "include
+arch
+syscall.h"
+	"include
+syscall.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"include
+syscall.h" -> "include
+zephyr
+types.h"
+	"include
+syscall.h" -> "zephyr
+include
+generated
+syscall_macros.h"
+	"include
+sys
+printk.h" [label="include
+sys
+printk.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+printk.h" -> "include
+toolchain.h"
+	"include
+sys
+printk.h" -> "stddef.h"
+	"include
+sys
+printk.h" -> "stdarg.h"
+	"include
+sys
+printk.h" -> "lib
+libc
+minimal
+include
+inttypes.h"
+	"include
+arch
+cpu.h" [label="include
+arch
+cpu.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+cpu.h" -> "include
+arch
+arm
+arch.h"
+	"include
+sys_clock.h" [label="include
+sys_clock.h" color=black fontname="" shape=oval style=""]
+	"include
+sys_clock.h" -> "include
+sys
+util.h"
+	"include
+sys_clock.h" -> "include
+sys
+dlist.h"
+	"include
+sys_clock.h" -> "include
+toolchain.h"
+	"include
+sys_clock.h" -> "include
+zephyr
+types.h"
+	"include
+sys_clock.h" -> "zephyr
+include
+generated
+syscalls
+sys_clock.h"
+	"include
+sys
+errno_private.h" [label="include
+sys
+errno_private.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+errno_private.h" -> "include
+toolchain.h"
+	"include
+sys
+errno_private.h" -> "zephyr
+include
+generated
+syscalls
+errno_private.h"
+	"zephyr
+include
+generated
+syscall_list.h" [label="zephyr
+include
+generated
+syscall_list.h" color=lightblue fontname="" shape=oval style=filled]
+	"zephyr
+include
+generated
+syscall_list.h" -> "include
+zephyr
+types.h"
+	"zephyr
+include
+generated
+syscall_macros.h" [label="zephyr
+include
+generated
+syscall_macros.h" color=lightblue fontname="" shape=oval style=filled]
+	"zephyr
+include
+generated
+syscall_macros.h" -> "include
+syscall.h"
+	"lib
+libc
+minimal
+include
+bits
+restrict.h" [label="lib
+libc
+minimal
+include
+bits
+restrict.h" color=black fontname="" shape=oval style=""]
+	"arch
+arm
+include
+cortex_m
+stack.h" [label="arch
+arm
+include
+cortex_m
+stack.h" color=black fontname="" shape=oval style=""]
+	"arch
+arm
+include
+cortex_m
+stack.h" -> "include
+arch
+arm
+cortex_m
+cmsis.h"
+	"arch
+arm
+include
+cortex_m
+exc.h" [label="arch
+arm
+include
+cortex_m
+exc.h" color=black fontname="" shape=oval style=""]
+	"arch
+arm
+include
+cortex_m
+exc.h" -> "include
+arch
+cpu.h"
+	"arch
+arm
+include
+cortex_m
+exc.h" -> "include
+arch
+arm
+cortex_m
+cmsis.h"
+	"arch
+arm
+include
+cortex_m
+exc.h" -> "include
+arch
+arm
+cortex_m
+exc.h"
+	"arch
+arm
+include
+cortex_m
+exc.h" -> "include
+irq_offload.h"
+	"kernel
+include
+timeout_q.h" [label="kernel
+include
+timeout_q.h" color=black fontname="" shape=oval style=""]
+	"kernel
+include
+timeout_q.h" -> "include
+kernel.h"
+	"kernel
+include
+timeout_q.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"lib
+libc
+minimal
+include
+stdint.h" [label="lib
+libc
+minimal
+include
+stdint.h" color=black fontname="" shape=oval style=""]
+	"include
+toolchain
+gcc.h" [label="include
+toolchain
+gcc.h" color=black fontname="" shape=oval style=""]
+	"include
+toolchain
+gcc.h" -> "include
+toolchain
+common.h"
+	"include
+toolchain
+gcc.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"include
+linker
+section_tags.h" [label="include
+linker
+section_tags.h" color=black fontname="" shape=oval style=""]
+	"include
+linker
+section_tags.h" -> "include
+toolchain.h"
+	"include
+sys
+list_gen.h" [label="include
+sys
+list_gen.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+list_gen.h" -> "stddef.h"
+	"include
+sys
+list_gen.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"include
+sys
+list_gen.h" -> "include
+sys
+util.h"
+	"include
+arch
+syscall.h" [label="include
+arch
+syscall.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+syscall.h" -> "include
+arch
+arm
+syscall.h"
+	"stdarg.h" [label="stdarg.h" color=lightgrey fontname="" shape=oval style=filled]
+	"lib
+libc
+minimal
+include
+inttypes.h" [label="lib
+libc
+minimal
+include
+inttypes.h" color=black fontname="" shape=oval style=""]
+	"lib
+libc
+minimal
+include
+inttypes.h" -> "lib
+libc
+minimal
+include
+stdint.h"
+	"include
+arch
+arm
+arch.h" [label="include
+arch
+arm
+arch.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+arm
+arch.h" -> "include
+generated_dts_board.h"
+	"include
+arch
+arm
+arch.h" -> "include
+arch
+arm
+cortex_m
+exc.h"
+	"include
+arch
+arm
+arch.h" -> "include
+arch
+arm
+cortex_m
+irq.h"
+	"include
+arch
+arm
+arch.h" -> "include
+arch
+arm
+cortex_m
+error.h"
+	"include
+arch
+arm
+arch.h" -> "include
+arch
+arm
+cortex_m
+misc.h"
+	"include
+arch
+arm
+arch.h" -> "include
+arch
+arm
+cortex_m
+memory_map.h"
+	"include
+arch
+arm
+arch.h" -> "include
+arch
+arm
+cortex_m
+asm_inline.h"
+	"include
+arch
+arm
+arch.h" -> "include
+arch
+common
+sys_io.h"
+	"include
+arch
+arm
+arch.h" -> "include
+arch
+common
+addr_types.h"
+	"include
+arch
+arm
+arch.h" -> "include
+arch
+common
+ffs.h"
+	"include
+arch
+arm
+arch.h" -> "include
+arch
+arm
+cortex_m
+nmi.h"
+	"include
+arch
+arm
+arch.h" -> "include
+arch
+arm
+cortex_m
+mpu
+arm_mpu.h"
+	"zephyr
+include
+generated
+syscalls
+sys_clock.h" [label="zephyr
+include
+generated
+syscalls
+sys_clock.h" color=lightblue fontname="" shape=oval style=filled]
+	"zephyr
+include
+generated
+syscalls
+sys_clock.h" -> "zephyr
+include
+generated
+syscall_list.h"
+	"zephyr
+include
+generated
+syscalls
+sys_clock.h" -> "zephyr
+include
+generated
+syscall_macros.h"
+	"zephyr
+include
+generated
+syscalls
+errno_private.h" [label="zephyr
+include
+generated
+syscalls
+errno_private.h" color=lightblue fontname="" shape=oval style=filled]
+	"zephyr
+include
+generated
+syscalls
+errno_private.h" -> "zephyr
+include
+generated
+syscall_list.h"
+	"zephyr
+include
+generated
+syscalls
+errno_private.h" -> "zephyr
+include
+generated
+syscall_macros.h"
+	"include
+arch
+arm
+cortex_m
+cmsis.h" [label="include
+arch
+arm
+cortex_m
+cmsis.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+arm
+cortex_m
+cmsis.h" -> "soc
+arm
+nordic_nrf
+nrf52
+soc.h"
+	"include
+arch
+arm
+cortex_m
+cmsis.h" -> "ext
+hal
+cmsis
+Include
+core_cm4.h"
+	"include
+arch
+arm
+cortex_m
+exc.h" [label="include
+arch
+arm
+cortex_m
+exc.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+arm
+cortex_m
+exc.h" -> "include
+zephyr
+types.h"
+	"include
+irq_offload.h" [label="include
+irq_offload.h" color=black fontname="" shape=oval style=""]
+	"include
+toolchain
+common.h" [label="include
+toolchain
+common.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+arm
+syscall.h" [label="include
+arch
+arm
+syscall.h" color=black fontname="" shape=oval style=""]
+	"include
+generated_dts_board.h" [label="include
+generated_dts_board.h" color=black fontname="" shape=oval style=""]
+	"include
+generated_dts_board.h" -> "zephyr
+include
+generated
+generated_dts_board_unfixed.h"
+	"include
+generated_dts_board.h" -> "zephyr
+include
+generated
+generated_dts_board_fixups.h"
+	"include
+arch
+arm
+cortex_m
+irq.h" [label="include
+arch
+arm
+cortex_m
+irq.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+arm
+cortex_m
+irq.h" -> "include
+irq.h"
+	"include
+arch
+arm
+cortex_m
+irq.h" -> "include
+sw_isr_table.h"
+	"include
+arch
+arm
+cortex_m
+irq.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"include
+arch
+arm
+cortex_m
+error.h" [label="include
+arch
+arm
+cortex_m
+error.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+arm
+cortex_m
+error.h" -> "include
+arch
+arm
+syscall.h"
+	"include
+arch
+arm
+cortex_m
+error.h" -> "include
+arch
+arm
+cortex_m
+exc.h"
+	"include
+arch
+arm
+cortex_m
+error.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"include
+arch
+arm
+cortex_m
+misc.h" [label="include
+arch
+arm
+cortex_m
+misc.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+arm
+cortex_m
+memory_map.h" [label="include
+arch
+arm
+cortex_m
+memory_map.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+arm
+cortex_m
+memory_map.h" -> "include
+sys
+util.h"
+	"include
+arch
+arm
+cortex_m
+asm_inline.h" [label="include
+arch
+arm
+cortex_m
+asm_inline.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+arm
+cortex_m
+asm_inline.h" -> "include
+arch
+arm
+cortex_m
+asm_inline_gcc.h"
+	"include
+arch
+common
+sys_io.h" [label="include
+arch
+common
+sys_io.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+common
+sys_io.h" -> "include
+zephyr
+types.h"
+	"include
+arch
+common
+sys_io.h" -> "include
+sys
+sys_io.h"
+	"include
+arch
+common
+addr_types.h" [label="include
+arch
+common
+addr_types.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+common
+ffs.h" [label="include
+arch
+common
+ffs.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+common
+ffs.h" -> "include
+zephyr
+types.h"
+	"include
+arch
+arm
+cortex_m
+nmi.h" [label="include
+arch
+arm
+cortex_m
+nmi.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+arm
+cortex_m
+mpu
+arm_mpu.h" [label="include
+arch
+arm
+cortex_m
+mpu
+arm_mpu.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+arm
+cortex_m
+mpu
+arm_mpu.h" -> "include
+arch
+arm
+cortex_m
+mpu
+arm_mpu_v7m.h"
+	"soc
+arm
+nordic_nrf
+nrf52
+soc.h" [label="soc
+arm
+nordic_nrf
+nrf52
+soc.h" color=black fontname="" shape=oval style=""]
+	"soc
+arm
+nordic_nrf
+nrf52
+soc.h" -> "soc
+arm
+nordic_nrf
+include
+nrf_common.h"
+	"soc
+arm
+nordic_nrf
+nrf52
+soc.h" -> "ext
+hal
+nordic
+nrfx
+mdk
+nrf.h"
+	"soc
+arm
+nordic_nrf
+nrf52
+soc.h" -> "include
+generated_dts_board.h"
+	"ext
+hal
+cmsis
+Include
+core_cm4.h" [label="ext
+hal
+cmsis
+Include
+core_cm4.h" color=black fontname="" shape=oval style=""]
+	"ext
+hal
+cmsis
+Include
+core_cm4.h" -> "lib
+libc
+minimal
+include
+stdint.h"
+	"ext
+hal
+cmsis
+Include
+core_cm4.h" -> "ext
+hal
+cmsis
+Include
+cmsis_version.h"
+	"ext
+hal
+cmsis
+Include
+core_cm4.h" -> "ext
+hal
+cmsis
+Include
+cmsis_compiler.h"
+	"zephyr
+include
+generated
+generated_dts_board_unfixed.h" [label="zephyr
+include
+generated
+generated_dts_board_unfixed.h" color=lightblue fontname="" shape=oval style=filled]
+	"zephyr
+include
+generated
+generated_dts_board_fixups.h" [label="zephyr
+include
+generated
+generated_dts_board_fixups.h" color=lightblue fontname="" shape=oval style=filled]
+	"include
+irq.h" [label="include
+irq.h" color=black fontname="" shape=oval style=""]
+	"include
+irq.h" -> "include
+arch
+cpu.h"
+	"include
+irq.h" -> "include
+toolchain.h"
+	"include
+irq.h" -> "include
+zephyr
+types.h"
+	"include
+sw_isr_table.h" [label="include
+sw_isr_table.h" color=black fontname="" shape=oval style=""]
+	"include
+sw_isr_table.h" -> "include
+zephyr
+types.h"
+	"include
+sw_isr_table.h" -> "include
+toolchain.h"
+	"include
+arch
+arm
+cortex_m
+asm_inline_gcc.h" [label="include
+arch
+arm
+cortex_m
+asm_inline_gcc.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+arm
+cortex_m
+asm_inline_gcc.h" -> "include
+zephyr
+types.h"
+	"include
+arch
+arm
+cortex_m
+asm_inline_gcc.h" -> "include
+arch
+arm
+cortex_m
+exc.h"
+	"include
+arch
+arm
+cortex_m
+asm_inline_gcc.h" -> "include
+irq.h"
+	"include
+sys
+sys_io.h" [label="include
+sys
+sys_io.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+sys_io.h" -> "include
+zephyr
+types.h"
+	"include
+sys
+sys_io.h" -> "stddef.h"
+	"include
+arch
+arm
+cortex_m
+mpu
+arm_mpu_v7m.h" [label="include
+arch
+arm
+cortex_m
+mpu
+arm_mpu_v7m.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+arm
+cortex_m
+mpu
+arm_mpu_v7m.h" -> "include
+arch
+arm
+cortex_m
+cmsis.h"
+	"soc
+arm
+nordic_nrf
+include
+nrf_common.h" [label="soc
+arm
+nordic_nrf
+include
+nrf_common.h" color=black fontname="" shape=oval style=""]
+	"ext
+hal
+nordic
+nrfx
+mdk
+nrf.h" [label="ext
+hal
+nordic
+nrfx
+mdk
+nrf.h" color=black fontname="" shape=oval style=""]
+	"ext
+hal
+cmsis
+Include
+cmsis_version.h" [label="ext
+hal
+cmsis
+Include
+cmsis_version.h" color=black fontname="" shape=oval style=""]
+	"ext
+hal
+cmsis
+Include
+cmsis_compiler.h" [label="ext
+hal
+cmsis
+Include
+cmsis_compiler.h" color=black fontname="" shape=oval style=""]
+	"ext
+hal
+cmsis
+Include
+cmsis_compiler.h" -> "lib
+libc
+minimal
+include
+stdint.h"
+}
