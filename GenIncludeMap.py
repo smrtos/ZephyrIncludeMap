@@ -65,7 +65,7 @@ def LoadIncludeSearchPaths(everything):
     return
 
 def PreProcessSrcFile(everything, srcFileFullpath):
-    cmdString = r"pcpp --passthru-unfound-includes <MACROS> <INPUT_SRC>"
+    cmdString = r"pcpp --passthru-unfound-includes --no-include <MACROS> <INPUT_SRC>"
     allMacros = " ".join(everything["configMacros"])
     srcFile = os.path.basename(srcFileFullpath)
     #srcFolder = os.path.dirname(srcFileFullpath)
@@ -101,23 +101,24 @@ def GetNextItemFromBacklog(everything):
             return t # <srcFileFullpath, preprocessedSrcFile>
     return None
 
-def ResolveFullPathForHeader(everything, header):
+def ResolveFullPathForHeader(everything, headerToResolve, dirOfIncluder):
     includeSearchPaths = everything["includeSearchPaths"]
-    for d in includeSearchPaths:
-        headerFullpath = os.path.join(d, header)
+    includeSearchPaths2 = includeSearchPaths + [dirOfIncluder]
+    for d in includeSearchPaths2:
+        headerFullpath = os.path.join(d, headerToResolve)
         if(os.path.exists(headerFullpath)):
             return os.path.normpath(headerFullpath)
     return None
 
-def GetIncludesFromAFile(everything, ppSrcFileFullpath):
+def GetIncludesFromAFile(everything, ppSrcFileFullpath, originalSrcFileDir):
     with open(ppSrcFileFullpath, "r") as f:
         lines = f.readlines()
     includes = []
     for line in lines:
-        m = re.match(r"#include\s+<(.*)>", line)
+        m = re.match(r"#include\s+[<\"](.*)[>\"]", line)
         if(not m is None):
             header = m.group(1)
-            headerFullpath = ResolveFullPathForHeader(everything, header)
+            headerFullpath = ResolveFullPathForHeader(everything, header, originalSrcFileDir)
             if(not headerFullpath is None):
                 includes.append(headerFullpath)
             else:
@@ -134,7 +135,8 @@ def ProcessWorkItem(everything, itemTuple):
     ppSrcFileFullpath = itemTuple[1]
     includes = []
     if(not ppSrcFileFullpath == "not-resolved-header"):
-        includes = GetIncludesFromAFile(everything, ppSrcFileFullpath) # if the header cannot be resolved, the path is not absolute.
+        originalSrcFileDir = os.path.dirname(srcFileFullpath)
+        includes = GetIncludesFromAFile(everything, ppSrcFileFullpath, originalSrcFileDir) # if the header cannot be resolved, the path is not absolute.
         for headerPath in includes: # the headerPath can be absolute, or relative for those headers cannot be resolved.
             AddItemToBacklog(everything, headerPath)
     fromNode = srcFileFullpath
