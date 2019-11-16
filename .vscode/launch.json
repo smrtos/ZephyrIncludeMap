@@ -11,7 +11,9 @@
             [
                 "C:/D/Sources/Zephyr.west/zephyrproject/zephyr",
                 "C:/D/Sources/Zephyr.west/zephyrproject/zephyr.build/helloworld.ARM",
-                "C:/D/Sources/Zephyr.west/zephyrproject/zephyr/include/sys/slist.h"                
+                "C:/D/DevBins/gnuarmemb/bin/arm-none-eabi-gcc.exe",
+                "C:/D/DevBins/gnuarmemb",
+                "C:/D/Sources/Zephyr.west/zephyrproject/zephyr/kernel/mempool.c"                
             ]
         }
     ]
