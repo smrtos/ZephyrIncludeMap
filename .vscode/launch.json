@@ -13,7 +13,7 @@
                 "C:/D/Sources/Zephyr.west/zephyrproject/zephyr.build/helloworld.ARM",
                 "C:/D/DevBins/gnuarmemb/bin/arm-none-eabi-gcc.exe",
                 "C:/D/DevBins/gnuarmemb",
-                "C:/D/Sources/Zephyr.west/zephyrproject/zephyr/kernel/mempool.c"                
+                "C:/D/Sources/Zephyr.west/zephyrproject/zephyr/kernel/idle.c"                
             ]
         }
     ]

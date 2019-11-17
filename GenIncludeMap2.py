@@ -85,13 +85,9 @@ def PreProcessSrcFile(everything):
         subprocess.run(cmdString, stdout=f, shell=True)
     return
 
-
 def GenerateGraphMatrix(everything):
     lineStack = []
     lineStack.append(os.path.normpath(os.path.realpath(everything["srcFileFullPath"])))
-    srcDir = os.path.normpath(everything["srcDir"])
-    bldDir = os.path.normpath(everything["bldDir"])
-    srcFileFullPath = os.path.normpath(everything["srcFileFullPath"])
     gm = everything["graphMatrix"]
 
     with open(everything["ppFileFullPath"], "r") as f:
@@ -112,8 +108,7 @@ def GenerateGraphMatrix(everything):
             if(toFile not in gm[fromFile]):
                 gm[fromFile].append(toFile)
         elif (fileFlag == '2'):
-            lineStack.pop(-1)
- 
+            lineStack.pop(-1) 
     return
 
 def IsGeneratedFile(everything, filePath):
@@ -162,7 +157,7 @@ def GenerateGraph(everything):
                 drawnNodes.append(looks2[0])
             graph.edge(looks1[0], looks2[0])
     graphFileName = os.path.basename(everything["srcFileFullPath"])
-    graph.render("./IncludeMap_{0}.gv".format(graphFileName), view= False)
+    graph.render("./IncludeMap_{0}.gv".format(graphFileName), view= False, format="pdf")
     pass
 
 def DoWork(everything):
@@ -170,9 +165,7 @@ def DoWork(everything):
     PreProcessSrcFile(everything)
     GenerateGraphMatrix(everything)
     GenerateGraph(everything)
-    return    
-
-
+    return
 
 def Usage():
     print("\n")
