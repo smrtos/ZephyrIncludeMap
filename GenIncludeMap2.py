@@ -13,7 +13,7 @@ def GetNinjaBuildFile(everything):
 def GetNinjaBuildBlock4SourceFile(everything):
     srcFileFullPath = everything["srcFileFullPath"]
     srcDir = everything["srcDir"]
-    srcFileRelativePath = os.path.relpath(srcFileFullPath, srcDir).replace("\\", "/")
+    srcFileRelativePath = os.path.relpath(srcFileFullPath, srcDir).replace(os.path.sep, "/")
     target = r"build\s.*{0}".format(srcFileRelativePath)
     nextTarget = r"build\s[^:]*:"
     buildBlockLines = []
@@ -109,14 +109,17 @@ def GenerateGraphMatrix(everything):
     return
 
 def IsGeneratedFile(everything, filePath):
-    return everything["bldDir"].lower() in filePath.lower()
+    return os.path.relpath(filePath, everything["bldDir"]) in filePath
+
+def IsSrcFile(everything, filePath):
+    return os.path.relpath(filePath, everything["srcDir"]) in filePath
 
 def IsTheStartingNode(everything, filePath):
     return everything["srcFileFullPath"].lower() in filePath.lower()
 
 def IsToolChainFile(everything, filePath):
-    isSrcFile = everything["srcDir"].lower() in filePath.lower()
-    isBldFile = everything["bldDir"].lower() in filePath.lower()
+    isSrcFile = IsSrcFile(everything, filePath)
+    isBldFile = IsGeneratedFile(everything, filePath)
     return not (isSrcFile or isBldFile) 
 
 def DetermineNodeLooks(everything, node):
@@ -124,10 +127,10 @@ def DetermineNodeLooks(everything, node):
     style = "filled"
     fontName = ""
     if(IsGeneratedFile(everything, node)):            
-        nodeText = os.path.relpath(node, everything["bldDir"]).replace("\\", "\n")
+        nodeText = os.path.relpath(node, everything["bldDir"]).replace(os.path.sep, "\n")
         nodeColor = "lightblue"
     elif(IsTheStartingNode(everything, node)):
-        nodeText = os.path.relpath(node, everything["srcDir"]).replace("\\", "\n")
+        nodeText = os.path.relpath(node, everything["srcDir"]).replace(os.path.sep, "\n")
         shape = "box"
         nodeColor = "green"
         fontName = "bold"
@@ -136,7 +139,7 @@ def DetermineNodeLooks(everything, node):
         nodeText = r"\<{0}\>".format(os.path.basename(node)) # use "<xxx>" for toolchain headers
         nodeColor = "lightgrey"        
     else:
-        nodeText = os.path.relpath(node, everything["srcDir"]).replace("\\", "\n")
+        nodeText = os.path.relpath(node, everything["srcDir"]).replace(os.path.sep, "\n")
         nodeColor = "black"
         style = ""
     return tuple([nodeText, nodeColor, shape, style, fontName])
