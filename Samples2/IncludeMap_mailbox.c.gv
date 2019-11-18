@@ -120,24 +120,9 @@ include
 generated
 syscalls
 kernel.h"
-	"lib
-gcc
-arm-none-eabi
-7.3.1
-include
-stddef.h" [label="lib
-gcc
-arm-none-eabi
-7.3.1
-include
-stddef.h" color=lightgrey fontname="" shape=oval style=filled]
+	"\<stddef.h\>" [label="\<stddef.h\>" color=lightgrey fontname="" shape=diamond style=filled]
 	"include
-kernel_includes.h" -> "lib
-gcc
-arm-none-eabi
-7.3.1
-include
-stddef.h"
+kernel_includes.h" -> "\<stddef.h\>"
 	"include
 zephyr
 types.h" [label="include
@@ -385,20 +370,10 @@ sys
 rb.h"
 	"include
 sys
-dlist.h" -> "lib
-gcc
-arm-none-eabi
-7.3.1
-include
-stddef.h"
+dlist.h" -> "\<stddef.h\>"
 	"include
 sys
-slist.h" -> "lib
-gcc
-arm-none-eabi
-7.3.1
-include
-stddef.h"
+slist.h" -> "\<stddef.h\>"
 	"include
 sys
 list_gen.h" [label="include
@@ -411,28 +386,13 @@ sys
 list_gen.h"
 	"include
 sys
-list_gen.h" -> "lib
-gcc
-arm-none-eabi
-7.3.1
-include
-stddef.h"
+list_gen.h" -> "\<stddef.h\>"
 	"include
 sys
-sflist.h" -> "lib
-gcc
-arm-none-eabi
-7.3.1
-include
-stddef.h"
+sflist.h" -> "\<stddef.h\>"
 	"include
 sys
-mempool_base.h" -> "lib
-gcc
-arm-none-eabi
-7.3.1
-include
-stddef.h"
+mempool_base.h" -> "\<stddef.h\>"
 	"zephyr
 include
 generated
@@ -486,31 +446,11 @@ syscall_macros.h" -> "include
 syscall.h"
 	"include
 sys
-printk.h" -> "lib
-gcc
-arm-none-eabi
-7.3.1
-include
-stddef.h"
-	"lib
-gcc
-arm-none-eabi
-7.3.1
-include
-stdarg.h" [label="lib
-gcc
-arm-none-eabi
-7.3.1
-include
-stdarg.h" color=lightgrey fontname="" shape=oval style=filled]
+printk.h" -> "\<stddef.h\>"
+	"\<stdarg.h\>" [label="\<stdarg.h\>" color=lightgrey fontname="" shape=diamond style=filled]
 	"include
 sys
-printk.h" -> "lib
-gcc
-arm-none-eabi
-7.3.1
-include
-stdarg.h"
+printk.h" -> "\<stdarg.h\>"
 	"lib
 libc
 minimal
@@ -806,12 +746,7 @@ sys
 sys_io.h"
 	"include
 sys
-sys_io.h" -> "lib
-gcc
-arm-none-eabi
-7.3.1
-include
-stddef.h"
+sys_io.h" -> "\<stddef.h\>"
 	"include
 arch
 arm
@@ -1240,12 +1175,7 @@ kernel_arch_func.h"
 libc
 minimal
 include
-string.h" -> "lib
-gcc
-arm-none-eabi
-7.3.1
-include
-stddef.h"
+string.h" -> "\<stddef.h\>"
 	"lib
 libc
 minimal

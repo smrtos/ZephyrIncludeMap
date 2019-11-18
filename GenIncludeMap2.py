@@ -118,7 +118,9 @@ def IsTheStartingNode(everything, filePath):
     return everything["srcFileFullPath"].lower() in filePath.lower()
 
 def IsToolChainFile(everything, filePath):
-    return everything["gccInstallDir"].lower() in filePath.lower()
+    isSrcFile = everything["srcDir"].lower() in filePath.lower()
+    isBldFile = everything["bldDir"].lower() in filePath.lower()
+    return not (isSrcFile or isBldFile) 
 
 def DetermineNodeLooks(everything, node):
     shape = "oval"
@@ -133,7 +135,8 @@ def DetermineNodeLooks(everything, node):
         nodeColor = "green"
         fontName = "bold"
     elif(IsToolChainFile(everything, node)):
-        nodeText = os.path.relpath(node, everything["gccInstallDir"]).replace("\\", "\n")
+        shape = "diamond"
+        nodeText = r"\<{0}\>".format(os.path.basename(node)) # use "<xxx>" for toolchain headers
         nodeColor = "lightgrey"        
     else:
         nodeText = os.path.relpath(node, everything["srcDir"]).replace("\\", "\n")
@@ -200,7 +203,7 @@ def CleanUp(everything):
 
 if __name__=="__main__":
     everything = dict()    
-    if(len(sys.argv)!= 6):
+    if(len(sys.argv)!= 5):
         Usage()
     else:
         print("Zephyr Include Map Generator ver 0.1")
@@ -208,10 +211,8 @@ if __name__=="__main__":
         everything["srcDir"] = os.path.abspath(os.path.normpath(sys.argv[1]))
         everything["bldDir"] = os.path.abspath(os.path.normpath(sys.argv[2]))
         everything["gccFullPath"] = os.path.abspath(os.path.normpath(sys.argv[3]))
-        everything["gccInstallDir"] = os.path.abspath(os.path.normpath(sys.argv[4]))
-        everything["srcFileFullPath"] = os.path.abspath(os.path.normpath(sys.argv[5]))
-        # <nodeA, <nodeX, nodeY, nodeZ, ...>>, A connects "to" X, Y, Z, ...
-        everything["graphMatrix"] = dict()
+        everything["srcFileFullPath"] = os.path.abspath(os.path.normpath(sys.argv[4]))
+        everything["graphMatrix"] = dict() # <nodeA, [nodeX, nodeY, nodeZ, ...]>, A connects "to" X, Y, Z, ...
         CleanseArgs(everything)
         DoWork(everything)
         OutputIncludeSearchPaths(everything)
