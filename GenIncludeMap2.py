@@ -1,9 +1,6 @@
 import sys
 import os.path
 import re
-import io
-import string
-import json
 import subprocess
 import glob
 from graphviz import Digraph
