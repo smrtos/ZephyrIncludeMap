@@ -1,0 +1,585 @@
+// Include Map for /home/ming/zephyr.github/zephyr/lib/os/rb.c
+digraph {
+	"lib
+os
+rb.c" [label="lib
+os
+rb.c" color=green fontname=bold shape=box style=filled]
+	"zephyr
+include
+generated
+autoconf.h" [label="zephyr
+include
+generated
+autoconf.h" color=lightblue fontname="" shape=oval style=filled]
+	"lib
+os
+rb.c" -> "zephyr
+include
+generated
+autoconf.h"
+	"include
+toolchain
+zephyr_stdint.h" [label="include
+toolchain
+zephyr_stdint.h" color=black fontname="" shape=oval style=""]
+	"lib
+os
+rb.c" -> "include
+toolchain
+zephyr_stdint.h"
+	"include
+kernel.h" [label="include
+kernel.h" color=black fontname="" shape=oval style=""]
+	"lib
+os
+rb.c" -> "include
+kernel.h"
+	"include
+sys
+rb.h" [label="include
+sys
+rb.h" color=black fontname="" shape=oval style=""]
+	"lib
+os
+rb.c" -> "include
+sys
+rb.h"
+	"include
+kernel_includes.h" [label="include
+kernel_includes.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel.h" -> "include
+kernel_includes.h"
+	"lib
+libc
+minimal
+include
+errno.h" [label="lib
+libc
+minimal
+include
+errno.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel.h" -> "lib
+libc
+minimal
+include
+errno.h"
+	"zephyr
+include
+generated
+kobj-types-enum.h" [label="zephyr
+include
+generated
+kobj-types-enum.h" color=lightblue fontname="" shape=oval style=filled]
+	"include
+kernel.h" -> "zephyr
+include
+generated
+kobj-types-enum.h"
+	"include
+debug
+tracing.h" [label="include
+debug
+tracing.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel.h" -> "include
+debug
+tracing.h"
+	"zephyr
+include
+generated
+syscalls
+kernel.h" [label="zephyr
+include
+generated
+syscalls
+kernel.h" color=lightblue fontname="" shape=oval style=filled]
+	"include
+kernel.h" -> "zephyr
+include
+generated
+syscalls
+kernel.h"
+	"\<stddef.h\>" [label="\<stddef.h\>" color=lightgrey fontname="" shape=diamond style=filled]
+	"include
+kernel_includes.h" -> "\<stddef.h\>"
+	"include
+zephyr
+types.h" [label="include
+zephyr
+types.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+zephyr
+types.h"
+	"lib
+libc
+minimal
+include
+limits.h" [label="lib
+libc
+minimal
+include
+limits.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "lib
+libc
+minimal
+include
+limits.h"
+	"include
+toolchain.h" [label="include
+toolchain.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+toolchain.h"
+	"include
+linker
+sections.h" [label="include
+linker
+sections.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+linker
+sections.h"
+	"include
+sys
+atomic.h" [label="include
+sys
+atomic.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+sys
+atomic.h"
+	"include
+sys
+__assert.h" [label="include
+sys
+__assert.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+sys
+__assert.h"
+	"include
+sched_priq.h" [label="include
+sched_priq.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+sched_priq.h"
+	"include
+sys
+slist.h" [label="include
+sys
+slist.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+sys
+slist.h"
+	"include
+sys
+sflist.h" [label="include
+sys
+sflist.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+sys
+sflist.h"
+	"include
+sys
+mempool_base.h" [label="include
+sys
+mempool_base.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+sys
+mempool_base.h"
+	"include
+kernel_version.h" [label="include
+kernel_version.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+kernel_version.h"
+	"include
+random
+rand32.h" [label="include
+random
+rand32.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+random
+rand32.h"
+	"arch
+x86_64
+include
+kernel_arch_thread.h" [label="arch
+x86_64
+include
+kernel_arch_thread.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "arch
+x86_64
+include
+kernel_arch_thread.h"
+	"include
+syscall.h" [label="include
+syscall.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+syscall.h"
+	"include
+sys
+printk.h" [label="include
+sys
+printk.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+sys
+printk.h"
+	"include
+arch
+cpu.h" [label="include
+arch
+cpu.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+arch
+cpu.h"
+	"include
+kernel_includes.h" -> "include
+sys
+rb.h"
+	"include
+sys_clock.h" [label="include
+sys_clock.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+sys_clock.h"
+	"include
+spinlock.h" [label="include
+spinlock.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+spinlock.h"
+	"include
+fatal.h" [label="include
+fatal.h" color=black fontname="" shape=oval style=""]
+	"include
+kernel_includes.h" -> "include
+fatal.h"
+	"lib
+libc
+minimal
+include
+stdint.h" [label="lib
+libc
+minimal
+include
+stdint.h" color=black fontname="" shape=oval style=""]
+	"include
+zephyr
+types.h" -> "lib
+libc
+minimal
+include
+stdint.h"
+	"include
+toolchain
+gcc.h" [label="include
+toolchain
+gcc.h" color=black fontname="" shape=oval style=""]
+	"include
+toolchain.h" -> "include
+toolchain
+gcc.h"
+	"include
+toolchain
+common.h" [label="include
+toolchain
+common.h" color=black fontname="" shape=oval style=""]
+	"include
+toolchain
+gcc.h" -> "include
+toolchain
+common.h"
+	"lib
+libc
+minimal
+include
+stdbool.h" [label="lib
+libc
+minimal
+include
+stdbool.h" color=black fontname="" shape=oval style=""]
+	"include
+toolchain
+gcc.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"include
+linker
+section_tags.h" [label="include
+linker
+section_tags.h" color=black fontname="" shape=oval style=""]
+	"include
+linker
+sections.h" -> "include
+linker
+section_tags.h"
+	"include
+sys
+util.h" [label="include
+sys
+util.h" color=black fontname="" shape=oval style=""]
+	"include
+sched_priq.h" -> "include
+sys
+util.h"
+	"include
+sys
+dlist.h" [label="include
+sys
+dlist.h" color=black fontname="" shape=oval style=""]
+	"include
+sched_priq.h" -> "include
+sys
+dlist.h"
+	"include
+sched_priq.h" -> "include
+sys
+rb.h"
+	"include
+sys
+util.h" -> "\<stddef.h\>"
+	"include
+sys
+dlist.h" -> "\<stddef.h\>"
+	"include
+sys
+slist.h" -> "\<stddef.h\>"
+	"include
+sys
+list_gen.h" [label="include
+sys
+list_gen.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+slist.h" -> "include
+sys
+list_gen.h"
+	"include
+sys
+list_gen.h" -> "\<stddef.h\>"
+	"include
+sys
+sflist.h" -> "\<stddef.h\>"
+	"include
+sys
+mempool_base.h" -> "\<stddef.h\>"
+	"zephyr
+include
+generated
+syscall_list.h" [label="zephyr
+include
+generated
+syscall_list.h" color=lightblue fontname="" shape=oval style=filled]
+	"include
+syscall.h" -> "zephyr
+include
+generated
+syscall_list.h"
+	"include
+arch
+syscall.h" [label="include
+arch
+syscall.h" color=black fontname="" shape=oval style=""]
+	"include
+syscall.h" -> "include
+arch
+syscall.h"
+	"zephyr
+include
+generated
+syscall_macros.h" [label="zephyr
+include
+generated
+syscall_macros.h" color=lightblue fontname="" shape=oval style=filled]
+	"include
+syscall.h" -> "zephyr
+include
+generated
+syscall_macros.h"
+	"zephyr
+include
+generated
+syscall_macros.h" -> "include
+syscall.h"
+	"include
+sys
+printk.h" -> "\<stddef.h\>"
+	"\<stdarg.h\>" [label="\<stdarg.h\>" color=lightgrey fontname="" shape=diamond style=filled]
+	"include
+sys
+printk.h" -> "\<stdarg.h\>"
+	"lib
+libc
+minimal
+include
+inttypes.h" [label="lib
+libc
+minimal
+include
+inttypes.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+printk.h" -> "lib
+libc
+minimal
+include
+inttypes.h"
+	"include
+arch
+x86_64
+arch.h" [label="include
+arch
+x86_64
+arch.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+cpu.h" -> "include
+arch
+x86_64
+arch.h"
+	"arch
+x86_64
+include
+kernel_arch_func.h" [label="arch
+x86_64
+include
+kernel_arch_func.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+x86_64
+arch.h" -> "arch
+x86_64
+include
+kernel_arch_func.h"
+	"include
+arch
+common
+sys_io.h" [label="include
+arch
+common
+sys_io.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+x86_64
+arch.h" -> "include
+arch
+common
+sys_io.h"
+	"include
+arch
+common
+ffs.h" [label="include
+arch
+common
+ffs.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+x86_64
+arch.h" -> "include
+arch
+common
+ffs.h"
+	"include
+irq.h" [label="include
+irq.h" color=black fontname="" shape=oval style=""]
+	"arch
+x86_64
+include
+kernel_arch_func.h" -> "include
+irq.h"
+	"arch
+x86_64
+include
+xuk-switch.h" [label="arch
+x86_64
+include
+xuk-switch.h" color=black fontname="" shape=oval style=""]
+	"arch
+x86_64
+include
+kernel_arch_func.h" -> "arch
+x86_64
+include
+xuk-switch.h"
+	"include
+irq.h" -> "include
+arch
+cpu.h"
+	"include
+sys
+sys_io.h" [label="include
+sys
+sys_io.h" color=black fontname="" shape=oval style=""]
+	"include
+arch
+common
+sys_io.h" -> "include
+sys
+sys_io.h"
+	"include
+sys
+sys_io.h" -> "\<stddef.h\>"
+	"zephyr
+include
+generated
+syscalls
+sys_clock.h" [label="zephyr
+include
+generated
+syscalls
+sys_clock.h" color=lightblue fontname="" shape=oval style=filled]
+	"include
+sys_clock.h" -> "zephyr
+include
+generated
+syscalls
+sys_clock.h"
+	"include
+sys
+errno_private.h" [label="include
+sys
+errno_private.h" color=black fontname="" shape=oval style=""]
+	"lib
+libc
+minimal
+include
+errno.h" -> "include
+sys
+errno_private.h"
+	"zephyr
+include
+generated
+syscalls
+errno_private.h" [label="zephyr
+include
+generated
+syscalls
+errno_private.h" color=lightblue fontname="" shape=oval style=filled]
+	"include
+sys
+errno_private.h" -> "zephyr
+include
+generated
+syscalls
+errno_private.h"
+	"include
+debug
+tracing.h" -> "include
+kernel.h"
+}
