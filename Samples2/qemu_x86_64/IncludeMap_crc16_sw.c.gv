@@ -1,0 +1,87 @@
+// Include Map for /home/ming/zephyr.github/zephyr/lib/os/crc16_sw.c
+digraph {
+	"lib
+os
+crc16_sw.c" [label="lib
+os
+crc16_sw.c" color=green fontname=bold shape=box style=filled]
+	"zephyr
+include
+generated
+autoconf.h" [label="zephyr
+include
+generated
+autoconf.h" color=lightblue fontname="" shape=oval style=filled]
+	"lib
+os
+crc16_sw.c" -> "zephyr
+include
+generated
+autoconf.h"
+	"include
+toolchain
+zephyr_stdint.h" [label="include
+toolchain
+zephyr_stdint.h" color=black fontname="" shape=oval style=""]
+	"lib
+os
+crc16_sw.c" -> "include
+toolchain
+zephyr_stdint.h"
+	"include
+sys
+crc.h" [label="include
+sys
+crc.h" color=black fontname="" shape=oval style=""]
+	"lib
+os
+crc16_sw.c" -> "include
+sys
+crc.h"
+	"include
+zephyr
+types.h" [label="include
+zephyr
+types.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+crc.h" -> "include
+zephyr
+types.h"
+	"lib
+libc
+minimal
+include
+stdbool.h" [label="lib
+libc
+minimal
+include
+stdbool.h" color=black fontname="" shape=oval style=""]
+	"include
+sys
+crc.h" -> "lib
+libc
+minimal
+include
+stdbool.h"
+	"\<stddef.h\>" [label="\<stddef.h\>" color=lightgrey fontname="" shape=diamond style=filled]
+	"include
+sys
+crc.h" -> "\<stddef.h\>"
+	"lib
+libc
+minimal
+include
+stdint.h" [label="lib
+libc
+minimal
+include
+stdint.h" color=black fontname="" shape=oval style=""]
+	"include
+zephyr
+types.h" -> "lib
+libc
+minimal
+include
+stdint.h"
+}
