@@ -5,8 +5,23 @@ import subprocess
 import glob
 from graphviz import Digraph
 
+def ErrorHandling(everything, errNo):
+    if(errNo == 1):
+        print("The source file [{0}] is not part of the build.".format(everything["srcFileFullPath"]))
+    elif (errNo == 2):
+        print("\"build.ninja\" file cannot be found at [{0}].".format(everything["bldDir"]))
+        print("Did you specify a wrong build folder?")
+    elif (errNo == 3):
+        print("Failed to render the graph.")
+        print("Is the file [{0}] writable?".format(everything["pdfFileFullPath"]))
+    sys.exit(0)
+    return
+
 def GetNinjaBuildFile(everything):
-    everything["ninjaBldFile"]= os.path.join(everything["bldDir"], "build.ninja")
+    ninjaBldFileFullPath = os.path.join(everything["bldDir"], "build.ninja")
+    if(not os.path.exists(ninjaBldFileFullPath)):
+        ErrorHandling(everything, 2)
+    everything["ninjaBldFile"] = ninjaBldFileFullPath    
     print("Ninja build file found:\n[%s]\n" % everything["ninjaBldFile"])
     return
 
@@ -28,6 +43,8 @@ def GetNinjaBuildBlock4SourceFile(everything):
                 break
             if(collect):
                 buildBlockLines.append(line)
+    if(len(buildBlockLines) == 0):
+        ErrorHandling(everything, 1)
     everything["buildBlockLines"] = buildBlockLines
     return
 
@@ -160,7 +177,13 @@ def GenerateGraph(everything):
                 drawnNodes.append(looks2[0])
             graph.edge(looks1[0], looks2[0])
     graphFileName = os.path.basename(everything["srcFileFullPath"])
-    graph.render("./IncludeMap_{0}.gv".format(graphFileName), view= False, format="pdf")
+    try:
+        pdfFileFullPath = os.path.realpath("./IncludeMap_{0}.gv.pdf".format(graphFileName))
+        everything["pdfFileFullPath"] = pdfFileFullPath
+        graph.render(os.path.realpath("./IncludeMap_{0}.gv".format(graphFileName)), view= False, format="pdf") # graphviz will add the pdf suffix
+    except:
+        print(sys.exc_info()[0])
+        ErrorHandling(everything, 3)
     pass
 
 def DoWork(everything):
