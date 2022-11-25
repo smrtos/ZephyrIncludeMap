@@ -11,3 +11,5 @@ The include map will only show the xxx.h file under yyy.h.
 
 In short, it reflects the final effecive result of the include hierarchy.
 
+A sample command:
+python3 GenIncludeMap2.py  /home/ming/sources/zephyrproject/zephyr/ /home/ming/sources/zephyrproject/zephyr/bld4 /home/ming/zephyr-sdk-0.15.0/arm-zephyr-eabi/bin/arm-zephyr-eabi-gcc /home/ming/sources/zephyrproject/zephyr/samples/drivers/uart/echo_bot/src/main.c
