@@ -10,6 +10,7 @@ if a previous yyy.h file has included it indirectly first.
 The include map will only show the xxx.h file under yyy.h.
 
 In short, it reflects the final effecive result of the include hierarchy.
+But it is good enough, isn't it?
 
 A sample command:
 
