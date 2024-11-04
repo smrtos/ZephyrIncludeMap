@@ -14,5 +14,5 @@ But it is good enough, isn't it?
 
 A sample command:
 
-> python3 GenIncludeMap2.py  ~/sources/zephyrproject/zephyr/ ~/sources/zephyrproject/zephyr/bld4 ~/zephyr-sdk-0.15.0/arm-zephyr-eabi/bin/arm-zephyr-eabi-gcc ~/sources/zephyrproject/zephyr/samples/drivers/uart/echo_bot/src/main.c
+> python3 GenIncludeMap2.py  ~/sources/zephyrproject/zephyr/ ~/sources/zephyrproject/zephyr/build ~/dev/toolchain/arm32-none-eabi/bin/arm-none-eabi-gcc ~/dev/toolchain/arm32-none-eabi/lib/gcc/arm-none-eabi/13.3.1/include ~/sources/zephyrproject/zephyr/samples/drivers/uart/echo_bot/src/main.c
 
