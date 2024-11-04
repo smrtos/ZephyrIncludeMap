@@ -61,6 +61,9 @@ def LoadIncludeSearchPaths(everything):
     rawSystemSearchPaths = re.findall(r"(-isystem\s[^\s]+)", line)
     systemSearchPaths = " ".join(rawSystemSearchPaths)
 
+    toolchainSearchPath = " {0}{1}".format("-I", everything["gccIncludePath"])
+    includeSearchPaths += toolchainSearchPath
+
     everything["includeSearchPaths"] = "{0} {1}".format(includeSearchPaths, systemSearchPaths)
     return
 
@@ -210,6 +213,7 @@ def Usage():
     return
 
 def CleanseArgs(everything):
+    # TODO...
     return
 
 def OutputIncludeSearchPaths(everything):
@@ -226,7 +230,7 @@ def CleanUp(everything):
 
 if __name__=="__main__":
     everything = dict()    
-    if(len(sys.argv)!= 5):
+    if(len(sys.argv)!= 6):
         Usage()
     else:
         print("Zephyr Include Map Generator ver 0.1")
@@ -234,7 +238,8 @@ if __name__=="__main__":
         everything["srcDir"] = os.path.abspath(os.path.normpath(sys.argv[1]))
         everything["bldDir"] = os.path.abspath(os.path.normpath(sys.argv[2]))
         everything["gccFullPath"] = os.path.abspath(os.path.normpath(sys.argv[3]))
-        everything["srcFileFullPath"] = os.path.abspath(os.path.normpath(sys.argv[4]))
+        everything["gccIncludePath"] = os.path.abspath(os.path.normpath(sys.argv[4]))
+        everything["srcFileFullPath"] = os.path.abspath(os.path.normpath(sys.argv[5]))
         everything["graphMatrix"] = dict() # <nodeA, [nodeX, nodeY, nodeZ, ...]>, A connects "to" X, Y, Z, ...
         CleanseArgs(everything)
         DoWork(everything)
