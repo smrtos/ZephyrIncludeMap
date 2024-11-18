@@ -209,6 +209,7 @@ def Usage():
     print("  <srcDir>: the Zephyr folder path.")
     print("  <bldDir>: the Zephyr build folder where build.ninja file is located.")
     print("  <gccFullPath>: the full path of the GCC used to build Zephyr.")
+    print("  <gccIncludePath>: the full path of the include directory that comes with your GCC bundle.")
     print("  <srcFileFullPath>: the full path of the Zephyr source file to generate include map for.")
     return
 
