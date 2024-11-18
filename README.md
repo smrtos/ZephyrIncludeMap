@@ -5,9 +5,9 @@ This tool generates include map for a Zephyr C source file.
 The generation is based on C preprocessor result.
 So it is NOT necessarily exactly the same as what you see in C source file.
 
-For example, a xxx.h file with include guard will not be included at a certain position
-if a previous yyy.h file has included it indirectly first.
-The include map will only show the xxx.h file under yyy.h.
+For example, A xxx.h file with include guard will not be included at a certain position
+of yyy.c if a previous zzz.h in yyy.c has included xxx.h already.
+The include map will only show the xxx.h file under zzz.h rather than under yyy.c.
 
 In short, it reflects the final effecive result of the include hierarchy.
 But it is good enough, isn't it?
