@@ -13,15 +13,15 @@ In short, it reflects the final effecive result of the include hierarchy.
 But it is good enough, isn't it?
 
 ```
-IncludeMap ver 0.1
-By Shao, Ming (smwikipedia@163.com)
+IncludeMap ver 0.2
+By Shao Ming (smwikipedia@163.com, smrtos@163.com)
 [Description]:
   This tool generates a map of included headers for a Zephyr .c file in the context of a Zephyr build.
 [Pre-condition]:
   A Zephyr build must be made before using this tool because some build-generated files are needed.
 [Usage]:
   GenIncludeMap <srcDir> <bldDir> <gccFullPath> <srcFileFullPath>
-  <srcDir>: the Zephyr folder path.
+  <zephyrDir>: the Zephyr folder path.
   <bldDir>: the Zephyr build folder where build.ninja file is located.
   <gccFullPath>: the full path of the GCC used to build Zephyr.
   <gccIncludePath>: the full path of the include directory that comes with your GCC bundle.
