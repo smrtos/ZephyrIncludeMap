@@ -98,6 +98,8 @@ def PreProcessSrcFile(everything):
     ppSrcFile = "pp." + srcFile
     ppSrcFileFullpath = os.path.join(".", ppSrcFile)
     everything["ppFileFullPath"] = ppSrcFileFullpath
+    print (f"preprocessed file: {ppSrcFileFullpath}")
+
     with open(ppSrcFileFullpath, "w") as f:
         subprocess.run(cmdString, stdout=f, shell=True)
     return
@@ -138,9 +140,7 @@ def IsTheStartingNode(everything, filePath):
     return everything["srcFileFullPath"].lower() in filePath.lower()
 
 def IsToolChainFile(everything, filePath):
-    isSrcFile = IsSrcFile(everything, filePath)
-    isBldFile = IsGeneratedFile(everything, filePath)
-    return not (isSrcFile or isBldFile) 
+    return os.path.realpath(everything["gccIncludePath"]) in filePath
 
 def DetermineNodeLooks(everything, node):
     shape = "oval"
@@ -156,13 +156,21 @@ def DetermineNodeLooks(everything, node):
         fontName = "bold"
     elif(IsToolChainFile(everything, node)):
         shape = "diamond"
-        nodeText = r"\<{0}\>".format(os.path.basename(node)) # use "<xxx>" for toolchain headers
+        # nodeText = r"\<{0}\>".format(os.path.basename(node)) # use "<xxx>" for toolchain headers
+        # print (f"\t{os.path.relpath(node, everything["gccIncludePath"])} - {node}")
+        nodeText = os.path.relpath(node, everything["gccIncludePath"]).replace(os.path.sep, "\n")
         nodeColor = "lightgrey"        
     else:
         nodeText = os.path.relpath(node, everything["srcDir"]).replace(os.path.sep, "\n")
         nodeColor = "black"
         style = ""
     return tuple([nodeText, nodeColor, shape, style, fontName])
+
+def DumpGraph(everything):
+    gm = everything["graphMatrix"]
+    print (f"Dump graph")
+    for fromNode in gm.keys():
+        print (f"{fromNode}:\n\t{gm[fromNode]}")
 
 def GenerateGraph(everything):
     graph = Digraph(engine="dot", comment="Include Map for {0}".format(everything["srcFileFullPath"]))
@@ -193,6 +201,7 @@ def DoWork(everything):
     print("Start generating include map for:\n[%s]\n" % everything["srcFileFullPath"])
     PreProcessSrcFile(everything)
     GenerateGraphMatrix(everything)
+    # DumpGraph(everything)
     GenerateGraph(everything)
     return
 
@@ -236,11 +245,11 @@ if __name__=="__main__":
     else:
         print("Zephyr Include Map Generator ver 0.1")
         print("By Shao, Ming (smwikipedia@163.com)")
-        everything["srcDir"] = os.path.abspath(os.path.normpath(sys.argv[1]))
-        everything["bldDir"] = os.path.abspath(os.path.normpath(sys.argv[2]))
-        everything["gccFullPath"] = os.path.abspath(os.path.normpath(sys.argv[3]))
-        everything["gccIncludePath"] = os.path.abspath(os.path.normpath(sys.argv[4]))
-        everything["srcFileFullPath"] = os.path.abspath(os.path.normpath(sys.argv[5]))
+        everything["srcDir"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[1])))
+        everything["bldDir"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[2])))
+        everything["gccFullPath"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[3])))
+        everything["gccIncludePath"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[4])))
+        everything["srcFileFullPath"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[5])))
         everything["graphMatrix"] = dict() # <nodeA, [nodeX, nodeY, nodeZ, ...]>, A connects "to" X, Y, Z, ...
         CleanseArgs(everything)
         DoWork(everything)
