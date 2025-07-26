@@ -27,8 +27,8 @@ def GetNinjaBuildFile(everything):
 
 def GetNinjaBuildBlock4SourceFile(everything):
     srcFileFullPath = everything["srcFileFullPath"]
-    srcDir = everything["srcDir"]
-    srcFileRelativePath = os.path.relpath(srcFileFullPath, srcDir).replace(os.path.sep, "/")
+    zephyrDir = everything["zephyrDir"]
+    srcFileRelativePath = os.path.relpath(srcFileFullPath, zephyrDir).replace(os.path.sep, "/")
     target = r"build\s.*{0}".format(srcFileRelativePath)
     nextTarget = r"build\s[^:]*:"
     buildBlockLines = []
@@ -131,26 +131,28 @@ def GenerateGraphMatrix(everything):
     return
 
 def IsGeneratedFile(everything, filePath):
-    return os.path.relpath(filePath, everything["bldDir"]) in filePath
+    # return os.path.relpath(filePath, everything["bldDir"]) in filePath
+    return everything["bldDir"].lower() in filePath.lower()
 
-def IsSrcFile(everything, filePath):
-    return os.path.relpath(filePath, everything["srcDir"]) in filePath
+def IsZephyrNativeFile(everything, filePath):
+    # return os.path.relpath(filePath, everything["zephyrDir"]) in filePath
+    return everything["zephyrDir"].lower() in filePath.lower()
 
 def IsTheStartingNode(everything, filePath):
     return everything["srcFileFullPath"].lower() in filePath.lower()
 
 def IsToolChainFile(everything, filePath):
-    return os.path.realpath(everything["gccIncludePath"]) in filePath
+    return everything["gccIncludePath"].lower() in filePath.lower()
 
 def DetermineNodeLooks(everything, node):
     shape = "oval"
     style = "filled"
     fontName = ""
     if(IsGeneratedFile(everything, node)):            
-        nodeText = os.path.relpath(node, everything["bldDir"]).replace(os.path.sep, "\n")
-        nodeColor = "lightblue"
+        nodeText = os.path.relpath(node, everything["bldDir"]).replace(os.path.sep, "/\n")
+        nodeColor = "orange"
     elif(IsTheStartingNode(everything, node)):
-        nodeText = os.path.relpath(node, everything["srcDir"]).replace(os.path.sep, "\n")
+        nodeText = os.path.relpath(node, everything["zephyrDir"]).replace(os.path.sep, "/\n")
         shape = "box"
         nodeColor = "green"
         fontName = "bold"
@@ -158,13 +160,42 @@ def DetermineNodeLooks(everything, node):
         shape = "diamond"
         # nodeText = r"\<{0}\>".format(os.path.basename(node)) # use "<xxx>" for toolchain headers
         # print (f"\t{os.path.relpath(node, everything["gccIncludePath"])} - {node}")
-        nodeText = os.path.relpath(node, everything["gccIncludePath"]).replace(os.path.sep, "\n")
-        nodeColor = "lightgrey"        
+        nodeText = os.path.relpath(node, everything["gccIncludePath"]).replace(os.path.sep, "/\n")
+        nodeColor = "lightgrey"
+    elif(IsZephyrNativeFile(everything, node)):
+        nodeText = os.path.relpath(node, everything["zephyrDir"]).replace(os.path.sep, "/\n")
+        nodeColor = "lightblue"
     else:
-        nodeText = os.path.relpath(node, everything["srcDir"]).replace(os.path.sep, "\n")
+        nodeText = os.path.relpath(node, everything["zephyrDir"]).replace(os.path.sep, "/\n")
         nodeColor = "black"
         style = ""
     return tuple([nodeText, nodeColor, shape, style, fontName])
+
+def AddLengends(graph):
+    nodeText = "Generated Files"
+    shape = "oval"
+    style = "filled"
+    nodeColor = "orange"
+    graph.node(nodeText, label = nodeText, color = nodeColor, shape = shape, style = style, fontname = "bold")
+
+    nodeText = "Toolchain Files"
+    shape = "diamond"
+    style = "filled"
+    nodeColor = "lightgrey"
+    graph.node(nodeText, label = nodeText, color = nodeColor, shape = shape, style = style, fontname = "bold")
+
+    nodeText = "Zephyr Native Files"
+    shape = "oval"
+    style = "filled"
+    nodeColor = "lightblue"
+    graph.node(nodeText, label = nodeText, color = nodeColor, shape = shape, style = style, fontname = "bold")
+
+    nodeText = "Application Files"
+    shape = "oval"
+    style = ""
+    nodeColor = "black"
+    graph.node(nodeText, label = nodeText, color = nodeColor, shape = shape, style = style, fontname = "bold")
+    pass
 
 def DumpGraph(everything):
     gm = everything["graphMatrix"]
@@ -187,6 +218,9 @@ def GenerateGraph(everything):
                 graph.node(looks2[0], label = looks2[0], color = looks2[1], shape = looks2[2], style = looks2[3], fontname = looks2[4])
                 drawnNodes.append(looks2[0])
             graph.edge(looks1[0], looks2[0])
+
+    AddLengends(graph)
+
     graphFileName = os.path.basename(everything["srcFileFullPath"])
     try:
         pdfFileFullPath = os.path.realpath("./IncludeMap_{0}.gv.pdf".format(graphFileName))
@@ -214,8 +248,8 @@ def Usage():
     print("[Pre-condition]:")
     print("  A Zephyr build must be made before using this tool because some build-generated files are needed.")
     print("[Usage]:")
-    print("  GenIncludeMap <srcDir> <bldDir> <gccFullPath> <srcFileFullPath>")
-    print("  <srcDir>: the Zephyr folder path.")
+    print("  GenIncludeMap <zephyrDir> <bldDir> <gccFullPath> <srcFileFullPath>")
+    print("  <zephyrDir>: the Zephyr folder path.")
     print("  <bldDir>: the Zephyr build folder where build.ninja file is located.")
     print("  <gccFullPath>: the full path of the GCC used to build Zephyr.")
     print("  <gccIncludePath>: the full path of the include directory that comes with your GCC bundle.")
@@ -245,7 +279,7 @@ if __name__=="__main__":
     else:
         print("Zephyr Include Map Generator ver 0.1")
         print("By Shao, Ming (smwikipedia@163.com)")
-        everything["srcDir"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[1])))
+        everything["zephyrDir"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[1])))
         everything["bldDir"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[2])))
         everything["gccFullPath"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[3])))
         everything["gccIncludePath"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[4])))
