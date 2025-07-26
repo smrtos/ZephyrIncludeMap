@@ -171,7 +171,7 @@ def DetermineNodeLooks(everything, node):
         style = ""
     return tuple([nodeText, nodeColor, shape, style, fontName])
 
-def AddLengends(graph):
+def AddLegends(graph):
     nodeText = "Generated Files"
     shape = "oval"
     style = "filled"
@@ -184,13 +184,13 @@ def AddLengends(graph):
     nodeColor = "lightgrey"
     graph.node(nodeText, label = nodeText, color = nodeColor, shape = shape, style = style, fontname = "bold")
 
-    nodeText = "Zephyr Native Files"
+    nodeText = "In-Zephyr Files"
     shape = "oval"
     style = "filled"
     nodeColor = "lightblue"
     graph.node(nodeText, label = nodeText, color = nodeColor, shape = shape, style = style, fontname = "bold")
 
-    nodeText = "Application Files"
+    nodeText = "Out-of-Zephyr Files"
     shape = "oval"
     style = ""
     nodeColor = "black"
@@ -219,7 +219,7 @@ def GenerateGraph(everything):
                 drawnNodes.append(looks2[0])
             graph.edge(looks1[0], looks2[0])
 
-    AddLengends(graph)
+    AddLegends(graph)
 
     graphFileName = os.path.basename(everything["srcFileFullPath"])
     try:

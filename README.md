@@ -9,7 +9,7 @@ For example, A xxx.h file with include guard will not be included at a certain p
 of yyy.c if a previous zzz.h in yyy.c has included xxx.h already.
 The include map will only show the xxx.h file under zzz.h rather than under yyy.c.
 
-In short, it reflects the final effecive result of the include hierarchy.
+In short, it reflects the final effective result of the include hierarchy.
 But it is good enough, isn't it?
 
 ```
