@@ -12,6 +12,8 @@ The include map will only show the xxx.h file under zzz.h rather than under yyy.
 In short, it reflects the final effective result of the include hierarchy.
 But it is good enough, isn't it?
 
+And for a single C file, the header included earlier appears more left in the graph.
+
 ```
 IncludeMap ver 0.2
 By Shao Ming (smwikipedia@163.com, smrtos@163.com)
