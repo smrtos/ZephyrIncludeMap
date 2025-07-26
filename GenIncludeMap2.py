@@ -241,8 +241,8 @@ def DoWork(everything):
 
 def Usage():
     print("\n")
-    print("IncludeMap ver 0.1")
-    print("By Shao, Ming (smwikipedia@163.com)")
+    print("IncludeMap ver 0.2")
+    print("By Shao Ming (smwikipedia@163.com or smrtos@163.com)")
     print("[Description]:")
     print("  This tool generates a map of included headers for a Zephyr .c file in the context of a Zephyr build.")
     print("[Pre-condition]:")
@@ -277,8 +277,8 @@ if __name__=="__main__":
     if(len(sys.argv)!= 6):
         Usage()
     else:
-        print("Zephyr Include Map Generator ver 0.1")
-        print("By Shao, Ming (smwikipedia@163.com)")
+        print("Zephyr Include Map Generator ver 0.2")
+        print("By Shao Ming (smwikipedia@163.com or smrtos@163.com)")
         everything["zephyrDir"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[1])))
         everything["bldDir"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[2])))
         everything["gccFullPath"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[3])))
