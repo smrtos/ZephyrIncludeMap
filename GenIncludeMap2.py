@@ -61,9 +61,6 @@ def LoadIncludeSearchPaths(everything):
     rawSystemSearchPaths = re.findall(r"(-isystem\s[^\s]+)", line)
     systemSearchPaths = " ".join(rawSystemSearchPaths)
 
-    toolchainSearchPath = " {0}{1}".format("-I", everything["gccIncludePath"])
-    includeSearchPaths += toolchainSearchPath
-
     everything["includeSearchPaths"] = "{0} {1}".format(includeSearchPaths, systemSearchPaths)
     return
 
@@ -132,41 +129,39 @@ def GenerateGraphMatrix(everything):
 
 def IsGeneratedFile(everything, filePath):
     # return os.path.relpath(filePath, everything["bldDir"]) in filePath
-    return everything["bldDir"].lower() in filePath.lower()
+    return everything["bldDir"] in os.path.realpath(os.path.abspath(filePath))
 
 def IsZephyrNativeFile(everything, filePath):
     # return os.path.relpath(filePath, everything["zephyrDir"]) in filePath
-    return everything["zephyrDir"].lower() in filePath.lower()
+    return everything["zephyrDir"] in os.path.realpath(os.path.abspath(filePath))
 
 def IsTheStartingNode(everything, filePath):
-    return everything["srcFileFullPath"].lower() in filePath.lower()
+    return everything["srcFileFullPath"] in os.path.realpath(os.path.abspath(filePath))
 
 def IsToolChainFile(everything, filePath):
-    return everything["gccIncludePath"].lower() in filePath.lower()
+    # return everything["gccIncludePath"] in os.path.realpath(os.path.abspath(filePath))
+    return "zephyr-sdk" in os.path.realpath(os.path.abspath(filePath))
 
 def DetermineNodeLooks(everything, node):
+    nodeText = os.path.relpath(node, everything["zephyrDir"]).replace(os.path.sep, "/\n")
     shape = "oval"
     style = "filled"
     fontName = ""
     if(IsGeneratedFile(everything, node)):            
-        nodeText = os.path.relpath(node, everything["bldDir"]).replace(os.path.sep, "/\n")
         nodeColor = "orange"
     elif(IsTheStartingNode(everything, node)):
-        nodeText = os.path.relpath(node, everything["zephyrDir"]).replace(os.path.sep, "/\n")
         shape = "box"
         nodeColor = "green"
         fontName = "bold"
-    elif(IsToolChainFile(everything, node)):
-        shape = "diamond"
-        # nodeText = r"\<{0}\>".format(os.path.basename(node)) # use "<xxx>" for toolchain headers
-        # print (f"\t{os.path.relpath(node, everything["gccIncludePath"])} - {node}")
-        nodeText = os.path.relpath(node, everything["gccIncludePath"]).replace(os.path.sep, "/\n")
-        nodeColor = "lightgrey"
+    # elif(IsToolChainFile(everything, node)):
+    #     shape = "diamond"
+    #     # nodeText = r"\<{0}\>".format(os.path.basename(node)) # use "<xxx>" for toolchain headers
+    #     # print (f"\t{os.path.relpath(node, everything["gccIncludePath"])} - {node}")
+    #     # nodeText = os.path.relpath(node, everything["gccIncludePath"]).replace(os.path.sep, "/\n")
+    #     nodeColor = "lightgrey"
     elif(IsZephyrNativeFile(everything, node)):
-        nodeText = os.path.relpath(node, everything["zephyrDir"]).replace(os.path.sep, "/\n")
         nodeColor = "lightblue"
     else:
-        nodeText = os.path.relpath(node, everything["zephyrDir"]).replace(os.path.sep, "/\n")
         nodeColor = "black"
         style = ""
     return tuple([nodeText, nodeColor, shape, style, fontName])
@@ -178,11 +173,11 @@ def AddLegends(graph):
     nodeColor = "orange"
     graph.node(nodeText, label = nodeText, color = nodeColor, shape = shape, style = style, fontname = "bold")
 
-    nodeText = "Toolchain Files"
-    shape = "diamond"
-    style = "filled"
-    nodeColor = "lightgrey"
-    graph.node(nodeText, label = nodeText, color = nodeColor, shape = shape, style = style, fontname = "bold")
+    # nodeText = "Toolchain Files"
+    # shape = "diamond"
+    # style = "filled"
+    # nodeColor = "lightgrey"
+    # graph.node(nodeText, label = nodeText, color = nodeColor, shape = shape, style = style, fontname = "bold")
 
     nodeText = "In-Zephyr Files"
     shape = "oval"
@@ -241,7 +236,7 @@ def DoWork(everything):
 
 def Usage():
     print("\n")
-    print("IncludeMap ver 0.2")
+    print("IncludeMap ver 0.21")
     print("By Shao Ming (smwikipedia@163.com or smrtos@163.com)")
     print("[Description]:")
     print("  This tool generates a map of included headers for a Zephyr .c file in the context of a Zephyr build.")
@@ -252,7 +247,6 @@ def Usage():
     print("  <zephyrDir>: the Zephyr folder path.")
     print("  <bldDir>: the Zephyr build folder where build.ninja file is located.")
     print("  <gccFullPath>: the full path of the GCC used to build Zephyr.")
-    print("  <gccIncludePath>: the full path of the include directory that comes with your GCC bundle.")
     print("  <srcFileFullPath>: the full path of the Zephyr source file to generate include map for.")
     return
 
@@ -274,16 +268,15 @@ def CleanUp(everything):
 
 if __name__=="__main__":
     everything = dict()    
-    if(len(sys.argv)!= 6):
+    if(len(sys.argv)!= 5):
         Usage()
     else:
-        print("Zephyr Include Map Generator ver 0.2")
+        print("Zephyr Include Map Generator ver 0.21")
         print("By Shao Ming (smwikipedia@163.com or smrtos@163.com)")
         everything["zephyrDir"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[1])))
         everything["bldDir"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[2])))
         everything["gccFullPath"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[3])))
-        everything["gccIncludePath"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[4])))
-        everything["srcFileFullPath"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[5])))
+        everything["srcFileFullPath"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[4])))
         everything["graphMatrix"] = dict() # <nodeA, [nodeX, nodeY, nodeZ, ...]>, A connects "to" X, Y, Z, ...
         CleanseArgs(everything)
         DoWork(everything)
