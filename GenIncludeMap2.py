@@ -22,7 +22,7 @@ def GetNinjaBuildFile(everything):
     if(not os.path.exists(ninjaBldFileFullPath)):
         ErrorHandling(everything, 2)
     everything["ninjaBldFile"] = ninjaBldFileFullPath    
-    print("Ninja build file found:\n[%s]\n" % everything["ninjaBldFile"])
+    print(f"[Ninja build file found:]{os.linesep}{everything["ninjaBldFile"]}")
     return
 
 def GetNinjaBuildBlock4SourceFile(everything):
@@ -53,11 +53,14 @@ def LoadIncludeSearchPaths(everything):
     for line in everything["buildBlockLines"]:
         if("INCLUDES" in line):
             break
+
+    # -I<dir>
     m = re.findall(r"(-I[^\s]+)", line) #(-I[^\s]+)|(-isystem\s[^\s]+)
     includeSearchPaths.extend(x[2:] if not x[-1] == "." else x[2:-1] for x in m)
     rawIncludeSearchPaths = [x if os.path.isabs(x) else os.path.join(everything["bldDir"], x) for x in includeSearchPaths]
     includeSearchPaths = " ".join(["-I{0}".format(os.path.normpath(x)) for x in rawIncludeSearchPaths])
 
+    # -isystem <dir>
     rawSystemSearchPaths = re.findall(r"(-isystem\s[^\s]+)", line)
     systemSearchPaths = " ".join(rawSystemSearchPaths)
 
@@ -95,7 +98,7 @@ def PreProcessSrcFile(everything):
     ppSrcFile = "pp." + srcFile
     ppSrcFileFullpath = os.path.join(".", ppSrcFile)
     everything["ppFileFullPath"] = ppSrcFileFullpath
-    print (f"preprocessed file: {ppSrcFileFullpath}")
+    # print (f"preprocessed file: {ppSrcFileFullpath}")
 
     with open(ppSrcFileFullpath, "w") as f:
         subprocess.run(cmdString, stdout=f, shell=True)
@@ -227,7 +230,7 @@ def GenerateGraph(everything):
     pass
 
 def DoWork(everything):
-    print("Start generating include map for:\n[%s]\n" % everything["srcFileFullPath"])
+    print(f"[Start generating include map for:]{os.linesep}{everything["srcFileFullPath"]}")
     PreProcessSrcFile(everything)
     GenerateGraphMatrix(everything)
     # DumpGraph(everything)
@@ -236,7 +239,7 @@ def DoWork(everything):
 
 def Usage():
     print("\n")
-    print("IncludeMap ver 0.21")
+    print("IncludeMap ver 0.22")
     print("By Shao Ming (smwikipedia@163.com or smrtos@163.com)")
     print("[Description]:")
     print("  This tool generates a map of included headers for a Zephyr .c file in the context of a Zephyr build.")
@@ -255,9 +258,13 @@ def CleanseArgs(everything):
     return
 
 def OutputIncludeSearchPaths(everything):
-    print("The include search paths:")
+    print("[The include search paths:]")
     for include in everything["includeSearchPaths"].split(" "):
-        print(os.path.normpath(include))
+        print(f"{include}", end="")
+        if (not "isystem" in include):
+            print()
+        else:
+            print(" ", end="")
     return
 
 def CleanUp(everything):
@@ -271,7 +278,7 @@ if __name__=="__main__":
     if(len(sys.argv)!= 5):
         Usage()
     else:
-        print("Zephyr Include Map Generator ver 0.21")
+        print("Zephyr Include Map Generator ver 0.22")
         print("By Shao Ming (smwikipedia@163.com or smrtos@163.com)")
         everything["zephyrDir"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[1])))
         everything["bldDir"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[2])))
@@ -282,4 +289,5 @@ if __name__=="__main__":
         DoWork(everything)
         OutputIncludeSearchPaths(everything)
         CleanUp(everything)
+        print (f"[Include map saved as:]{os.linesep}{everything["pdfFileFullPath"]}")
     sys.exit(0)
