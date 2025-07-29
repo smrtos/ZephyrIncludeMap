@@ -1,7 +1,5 @@
-# ZephyrIncludeMap
-Header include map generator for Zephyr RTOS
-
-This tool generates include map for a Zephyr C source file.
+# Zephyr Include Map
+This tool generates include map for a Zephyr RTOS C source file.
 The generation is based on C preprocessor result.
 So it is NOT necessarily exactly the same as what you see in C source file.
 
@@ -15,7 +13,7 @@ But it is good enough, isn't it?
 And for a single C file, the header included earlier appears more left in the graph.
 
 ```
-IncludeMap ver 0.2
+IncludeMap ver 0.22
 By Shao Ming (smwikipedia@163.com, smrtos@163.com)
 [Description]:
   This tool generates a map of included headers for a Zephyr .c file in the context of a Zephyr build.
