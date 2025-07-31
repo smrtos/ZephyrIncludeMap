@@ -1,8 +1,21 @@
+"""
+Zephyr Include Map
+v0.22
+By Shao Ming (smwikipedia@163.com or smrtos@163.com)
+
+This tool generates include map for a Zephyr RTOS C source file.
+The generation is based on C preprocessor result.
+
+Sample:
+python3 GenIncludeMap2.py  -z ~/zephyr/ -b ~/zephyr/build -t ~/toolchain/arm32-none-eabi/bin/arm-none-eabi-gcc -s ~/zephyr/samples/drivers/uart/echo_bot/src/main.c
+
+"""
 import sys
 import os.path
 import re
 import subprocess
 import glob
+import argparse
 from graphviz import Digraph
 
 def ErrorHandling(everything, errNo):
@@ -237,21 +250,20 @@ def DoWork(everything):
     GenerateGraph(everything)
     return
 
-def Usage():
-    print("\n")
-    print("IncludeMap ver 0.22")
-    print("By Shao Ming (smwikipedia@163.com or smrtos@163.com)")
-    print("[Description]:")
-    print("  This tool generates a map of included headers for a Zephyr .c file in the context of a Zephyr build.")
-    print("[Pre-condition]:")
-    print("  A Zephyr build must be made before using this tool because some build-generated files are needed.")
-    print("[Usage]:")
-    print("  GenIncludeMap <zephyrDir> <bldDir> <gccFullPath> <srcFileFullPath>")
-    print("  <zephyrDir>: the Zephyr folder path.")
-    print("  <bldDir>: the Zephyr build folder where build.ninja file is located.")
-    print("  <gccFullPath>: the full path of the GCC used to build Zephyr.")
-    print("  <srcFileFullPath>: the full path of the Zephyr source file to generate include map for.")
-    return
+def ParseArgs():
+    """
+    Need to specify:
+    - which artifacts to build
+    - which overrides to apply
+    """
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
+    parser.add_argument("-z", "--zephyrDir", required=True, type=str, help="the full path of the zephyr RTOS.")
+    parser.add_argument("-b", "--bldDir", required=True, type=str, help="the Zephyr build folder where build.ninja file is located.")
+    parser.add_argument("-t", "--gccFullPath", required=True, type=str, help="the full path of the GCC used to build Zephyr.")
+    parser.add_argument("-s", "--srcFileFullPath", required=True, type=str, help="the full path of the Zephyr source file to generate include map for.")
+
+    args = parser.parse_args()
+    return args
 
 def CleanseArgs(everything):
     # TODO...
@@ -274,20 +286,16 @@ def CleanUp(everything):
     return
 
 if __name__=="__main__":
-    everything = dict()    
-    if(len(sys.argv)!= 5):
-        Usage()
-    else:
-        print("Zephyr Include Map Generator ver 0.22")
-        print("By Shao Ming (smwikipedia@163.com or smrtos@163.com)")
-        everything["zephyrDir"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[1])))
-        everything["bldDir"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[2])))
-        everything["gccFullPath"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[3])))
-        everything["srcFileFullPath"] = os.path.realpath(os.path.abspath(os.path.normpath(sys.argv[4])))
-        everything["graphMatrix"] = dict() # <nodeA, [nodeX, nodeY, nodeZ, ...]>, A connects "to" X, Y, Z, ...
-        CleanseArgs(everything)
-        DoWork(everything)
-        OutputIncludeSearchPaths(everything)
-        CleanUp(everything)
-        print (f"[Include map saved as:]{os.linesep}{everything["pdfFileFullPath"]}")
+    everything = dict()
+    args = ParseArgs()
+    everything["zephyrDir"] = os.path.realpath(os.path.abspath(os.path.normpath(args.zephyrDir)))
+    everything["bldDir"] = os.path.realpath(os.path.abspath(os.path.normpath(args.bldDir)))
+    everything["gccFullPath"] = os.path.realpath(os.path.abspath(os.path.normpath(args.gccFullPath)))
+    everything["srcFileFullPath"] = os.path.realpath(os.path.abspath(os.path.normpath(args.srcFileFullPath)))
+    everything["graphMatrix"] = dict() # <nodeA, [nodeX, nodeY, nodeZ, ...]>, A connects "to" X, Y, Z, ...
+    CleanseArgs(everything)
+    DoWork(everything)
+    OutputIncludeSearchPaths(everything)
+    CleanUp(everything)
+    print (f"[Include map saved as:]{os.linesep}{everything["pdfFileFullPath"]}")
     sys.exit(0)
